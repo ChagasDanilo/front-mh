@@ -10,7 +10,7 @@ const Lista = ({ navigation }) => {
             <ScrollView>
                 <View>
                     <Text>
-                        Lista de Comprovantes
+                        Lista de Comprovantes testando
                     </Text>
                 </View>
             </ScrollView>
