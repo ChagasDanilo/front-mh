@@ -6,15 +6,17 @@ import { SafeAreaView } from 'react-navigation';
 
 const Lista = ({ navigation }) => {  
     return (
-        <SafeAreaView style={Styles.Container}>
-            <ScrollView>
-                <View>
-                    <Text>
-                        Lista de Comprovantes testando
-                    </Text>
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <View style={{flex: 1, backgroundColor: '#262626',}}>
+            <SafeAreaView style={Styles.Container}>
+                <ScrollView>
+                    <View>
+                        <Text>
+                            Lista de Comprovantes testando
+                        </Text>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+        </View>
 )};
 
 export default Lista;

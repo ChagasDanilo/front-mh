@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    //marginTop: Constants.statusBarHeight,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#262626',    
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   ContainerLogin: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
+    //marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: '#262626',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#fff',
     borderBottomWidth: 1,
     marginTop: 20,
-    color: '#fff',
+    color: '#fff',    
   },
   Botton: {
     marginTop: 50,

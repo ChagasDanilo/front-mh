@@ -28,6 +28,7 @@ const Login = ({ navigation }) => {
                     autoCorrect={false}
                     onChangeText={email => onChangeEmail(email)}
                     value={email}
+                    placeholderTextColor={'#fff'}
                 />
             </View>
             <View>
@@ -40,6 +41,7 @@ const Login = ({ navigation }) => {
                     textContentType={"password"}
                     onChangeText={senha => onChangeSenha(senha)}
                     value={senha}
+                    placeholderTextColor={'#fff'}
                 />
             </View>
 
