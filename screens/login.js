@@ -21,7 +21,7 @@ const Login = ({ navigation }) => {
             <View>
                 <TextInput                    
                     style={Styles.TextInput}
-                    placeholder='Email'
+                    placeholder='Digite seu email...'
                     textContentType={"emailAddress"}
                     keyboardType={'email-address'}
                     autoCapitalize='none'
@@ -34,7 +34,7 @@ const Login = ({ navigation }) => {
             <View>
                 <TextInput             
                     style={Styles.TextInput}
-                    placeholder='Senha'
+                    placeholder='Digite sua senha...'
                     secureTextEntry={true}
                     autoCapitalize='none'
                     autoCorrect={false}
@@ -57,9 +57,9 @@ const Login = ({ navigation }) => {
 
             <View style={Styles.Espacamento}/>
             <View>
-                <TouchableOpacity   
+                <TouchableOpacity
                     onPress={() => navigation.navigate('NewAccount')}
-                    hitSlop={{ top: 20, bottom: 20, left: 50, right: 50 }}
+                    hitSlop={{ top: 5, bottom: 5, left: 5, right: 5 }}
                 >
                     <Text style={Styles.TextRight}>
                         Não possui conta?

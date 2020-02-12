@@ -1,21 +1,20 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Constants from 'expo-constants';
 
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    //marginTop: Constants.statusBarHeight,
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#262626',    
     paddingHorizontal: 10,
     paddingVertical: 10,
+    paddingTop: 40,
     fontSize: Constants.systemFonts.size,
     fontStyle: Constants.systemFonts.style,
   },
   ContainerLogin: {
     flex: 1,
-    //marginTop: Constants.statusBarHeight,
     justifyContent: 'center',
     alignItems: 'stretch',
     backgroundColor: '#262626',
@@ -44,6 +43,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: 'transparent',
   },
+  TextTitulo: {
+    alignSelf: 'flex-start',
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    paddingStart: 10,
+    fontWeight: 'bold',
+  },
   TextRight: {
     textAlign: 'right',
     alignItems: 'flex-end',
@@ -53,7 +61,7 @@ const styles = StyleSheet.create({
   Logo: {
     width: 120,
     height: 120,
-    resizeMode : 'stretch',
+    resizeMode : 'cover',
   },
   ViewLogo: {
     alignItems: 'center',
@@ -62,7 +70,26 @@ const styles = StyleSheet.create({
   },
   Espacamento: {
     marginTop: 10,
-  }
+  },
+  ItemLista: {
+    backgroundColor: 'transparent',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  ViewRight: {
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingBottom: 30,
+  },
+  ImgComp: {
+    width: Dimensions.get("window").width,
+    height: (Dimensions.get("window").height / 2),
+    resizeMode : 'contain',
+    alignContent: 'center',
+    alignSelf: 'center',
+    margin: 20,
+  },
 });
 
 export default styles

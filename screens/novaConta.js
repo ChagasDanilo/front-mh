@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Alert } from 'react-native';
 
-
 import Styles from '../constants/styles';
 import api from '../services/api';
-
-
 
 const NovaConta = ({ navigation }) => {
   
@@ -33,11 +30,11 @@ const NovaConta = ({ navigation }) => {
     
     return (
     <KeyboardAvoidingView style={Styles.Container} behavior="padding" enabled>
-        <View style={Styles.Container}>             
+        <View>             
             <View>
                 <TextInput                    
                     style={Styles.TextInput}
-                    placeholder='Nome'
+                    placeholder='Digite seu nome...'
                     textContentType={"name"}
                     onChangeText={nome => onChangeNome(nome)}
                     value={nome}
@@ -47,7 +44,7 @@ const NovaConta = ({ navigation }) => {
             <View>
                 <TextInput                    
                     style={Styles.TextInput}
-                    placeholder='CPF'
+                    placeholder='Digite seu CPF...'
                     keyboardType={'number-pad'}
                     onChangeText={cpf => onChangeCPF(cpf)}
                     value={cpf}
@@ -57,7 +54,7 @@ const NovaConta = ({ navigation }) => {
             <View>
                 <TextInput                    
                     style={Styles.TextInput}
-                    placeholder='Email'
+                    placeholder='Digite seu email...'
                     textContentType={"emailAddress"}
                     keyboardType={'email-address'}
                     autoCapitalize='none'
@@ -70,7 +67,7 @@ const NovaConta = ({ navigation }) => {
             <View>
                 <TextInput             
                     style={Styles.TextInput}
-                    placeholder='Senha'
+                    placeholder='Digite sua senha...'
                     secureTextEntry={true}
                     autoCapitalize='none'
                     textContentType={"newPassword"}
