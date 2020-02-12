@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    backgroundColor: '#00aaff',
+    backgroundColor: '#00C869',
     alignItems: 'stretch',
     borderRadius: 5,
   },
@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingStart: 10,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   TextRight: {
     textAlign: 'right',
@@ -58,8 +59,17 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: 'transparent',
   },
+  TextDetailItem: {
+    alignSelf: 'flex-start',
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    paddingStart: 10,
+    marginBottom: 5,
+  },
   Logo: {
-    width: 120,
+    width: 150,
     height: 120,
     resizeMode : 'cover',
   },
@@ -68,14 +78,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 30,
   },
+  ViewItem: {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+  },
   Espacamento: {
     marginTop: 10,
-  },
-  ItemLista: {
-    backgroundColor: 'transparent',
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
   },
   ViewRight: {
     alignItems: 'flex-end',

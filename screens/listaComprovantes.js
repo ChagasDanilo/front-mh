@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 import Styles from '../constants/styles';
 import api from '../services/api';
 
-const URL_BASE = 'http://williamestrela.herokuapp.com/';
+const URL_BASE = 'https://williamestrela.herokuapp.com';
 
 const DATA = [
   {
@@ -37,8 +37,8 @@ export default function App() {
 
   useEffect(()=>{
     const handelGetData  = async () =>{
-      const response = await api.get('receipt');
-      Alert.alert(response.data[0].id);
+      const response = await api.get('receipt/1');
+      Alert.alert(response.data[0].path);
       setComprovantes(response.data);
     }
     handelGetData();
@@ -53,10 +53,16 @@ export default function App() {
 
             <FlatList
                 data={comprovantes}
-                renderItem={({item}) =>                          
+                renderItem={({item}) => 
+                <View style={Styles.ViewItem}>
                   <Image
                     source={{uri: URL_BASE + item.url}}
                     style={Styles.ImgComp} />
+                    <Text style={Styles.TextDetailItem}>
+                      {item.comment}
+                    </Text>
+                </View>                         
+                  
                                 
               }
                 keyExtractor={item => item.id} 

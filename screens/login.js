@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
             
             <View style={Styles.ViewLogo}>
             <Image 
-                source={require('../assets/images/logo.png')}
+                source={require('../assets/icon.png')}
                 style={Styles.Logo} />
             </View>
             
