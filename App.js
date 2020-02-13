@@ -8,13 +8,13 @@ import listaComp from './screens/listaComprovantes';
 
 const mainNavigation = createStackNavigator({  
   Page1: {
-    screen: Login    
+    screen: Login,
   },
   NewAccount: {
     screen: novaConta
   },
   ListaComprovantes: {
-    screen: listaComp
+    screen: listaComp,
   },
 },
 {

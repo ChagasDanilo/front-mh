@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#fff',
     backgroundColor: 'transparent',
+    fontWeight: 'bold',
   },
   TextTitulo: {
     alignSelf: 'flex-start',
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontWeight: 'bold',
     paddingStart: 10,
-    fontWeight: 'bold',
     marginBottom: 5,
   },
   TextRight: {
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontWeight: 'bold',
     paddingStart: 10,
+    marginTop : 5,
     marginBottom: 5,
   },
   Logo: {
@@ -79,8 +80,11 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   ViewItem: {
-    borderBottomColor: '#fff',
-    borderBottomWidth: 1,
+    backgroundColor: '#404040',
+    borderColor: 'transparent',
+    borderWidth: 20,
+    borderRadius: 40,
+    padding: 5,
   },
   Espacamento: {
     marginTop: 10,
@@ -91,12 +95,11 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   ImgComp: {
-    width: Dimensions.get("window").width,
+    width: (Dimensions.get("window").width - 15),
     height: (Dimensions.get("window").height / 2),
     resizeMode : 'contain',
     alignContent: 'center',
     alignSelf: 'center',
-    margin: 20,
   },
 });
 

@@ -1,44 +1,20 @@
-import React ,{useState, useEffect} from 'react';
+import React , {useState, useEffect} from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, Image, Alert } from 'react-native';
-import Constants from 'expo-constants';
+import ActionButton from 'react-native-action-button';
+import { Icon } from 'react-native-elements'
 
 import Styles from '../constants/styles';
 import api from '../services/api';
 
 const URL_BASE = 'https://williamestrela.herokuapp.com';
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-    image: {uri: URL_BASE + 'receipt/1/file'},
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-    image: {uri: URL_BASE + 'receipt/1/file'},
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-    image: {uri: URL_BASE + 'receipt/1/file'},
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d722',
-    title: 'Third Item',
-    image: {uri: URL_BASE + 'receipt/1/file'},
-  },
-];
-
 export default function App() {
   const [comprovantes , setComprovantes ] = useState([]);
-
-   
 
   useEffect(()=>{
     const handelGetData  = async () =>{
       const response = await api.get('receipt/1');
-      Alert.alert(response.data[0].path);
+      //Alert.alert(response.data[0].path);
       setComprovantes(response.data);
     }
     handelGetData();
@@ -55,20 +31,32 @@ export default function App() {
                 data={comprovantes}
                 renderItem={({item}) => 
                 <View style={Styles.ViewItem}>
+                  <Text style={Styles.TextDetailItem}>
+                    {item.comment}
+                  </Text>
                   <Image
                     source={{uri: URL_BASE + item.url}}
                     style={Styles.ImgComp} />
-                    <Text style={Styles.TextDetailItem}>
-                      {item.comment}
-                    </Text>
-                </View>                         
-                  
-                                
+                </View>                                                                       
               }
-                keyExtractor={item => item.id} 
+                keyExtractor={item => item.id.toString()} 
                 numColumns={1}
-            />
+            />            
         </SafeAreaView>
+        <ActionButton buttonColor="#008044">
+          <ActionButton.Item
+            buttonColor="#00C869"
+            title="Ver comprovantes emitidos"
+            onPress={() => console.log('notes tapped!')}>
+            <Icon name='info' color='white' type='font-awesome' />
+          </ActionButton.Item>
+          <ActionButton.Item
+            buttonColor="#00C869"
+            title="Detalhes da conta"
+            onPress={() => {}}>
+            <Icon name='receipt' color='white' type='material' />
+          </ActionButton.Item>
+        </ActionButton>        
     </View>
   );
 };
