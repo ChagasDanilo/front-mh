@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#262626',    
     paddingHorizontal: 10,
     paddingVertical: 10,
-    paddingTop: 40,
     fontSize: Constants.systemFonts.size,
     fontStyle: Constants.systemFonts.style,
   },
@@ -28,7 +27,8 @@ const styles = StyleSheet.create({
     borderBottomColor: '#fff',
     borderBottomWidth: 1,
     marginTop: 20,
-    color: '#fff',    
+    color: '#fff',
+    backgroundColor: 'transparent',
   },
   Botton: {
     marginTop: 50,
@@ -61,13 +61,21 @@ const styles = StyleSheet.create({
   },
   TextDetailItem: {
     alignSelf: 'flex-start',
-    textAlign: 'center',
+    textAlign: 'left',
     color: '#fff',
     backgroundColor: 'transparent',
     fontWeight: 'bold',
     paddingStart: 10,
     marginTop : 5,
-    marginBottom: 5,
+  },
+  TextDetailItemRight: {
+    alignSelf: 'flex-end',
+    textAlign: 'left',
+    color: '#fff',
+    backgroundColor: 'transparent',
+    fontWeight: 'bold',
+    paddingEnd: 12,
+    marginTop : 5,
   },
   Logo: {
     width: 150,
@@ -100,6 +108,7 @@ const styles = StyleSheet.create({
     resizeMode : 'contain',
     alignContent: 'center',
     alignSelf: 'center',
+    marginTop: 10,
   },
 });
 

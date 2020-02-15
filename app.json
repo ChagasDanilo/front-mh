@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "front-mh",
-    "slug": "front-mh",
+    "name": "PayGuard",
+    "slug": "PayGuard",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [

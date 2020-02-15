@@ -39,6 +39,7 @@ const NovaConta = ({ navigation }) => {
                     onChangeText={nome => onChangeNome(nome)}
                     value={nome}
                     placeholderTextColor={'#fff'}
+                    autoFocus={true}
                 />
             </View>
             <View>
@@ -49,6 +50,7 @@ const NovaConta = ({ navigation }) => {
                     onChangeText={cpf => onChangeCPF(cpf)}
                     value={cpf}
                     placeholderTextColor={'#fff'}
+                    maxLength={18}
                 />
             </View>              
             <View>
@@ -91,6 +93,22 @@ const NovaConta = ({ navigation }) => {
         </View>
     </KeyboardAvoidingView>
 
-)};
+)
+};
+
+NovaConta.navigationOptions = {
+    title: 'Voltar',
+    gestureEnabled: true,
+    headerStyle: {
+      backgroundColor: '#262626',
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0,      
+    },
+    headerTintColor: '#00C869',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },  
+};
 
 export default NovaConta;

@@ -14,7 +14,7 @@ const Login = ({ navigation }) => {
             
             <View style={Styles.ViewLogo}>
             <Image 
-                source={require('../assets/icon.png')}
+                source={require('../assets/images/icone.png')}
                 style={Styles.Logo} />
             </View>
             
@@ -29,6 +29,7 @@ const Login = ({ navigation }) => {
                     onChangeText={email => onChangeEmail(email)}
                     value={email}
                     placeholderTextColor={'#fff'}
+                    autoFocus={true}
                 />
             </View>
             <View>
@@ -48,6 +49,7 @@ const Login = ({ navigation }) => {
             <View style={Styles.Botton}>
                 <TouchableOpacity                
                     onPress={() => navigation.navigate('ListaComprovantes')}
+                    hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
                 >
                     <Text style={Styles.Text}>
                         Login
@@ -70,6 +72,7 @@ const Login = ({ navigation }) => {
         </View>
     </KeyboardAvoidingView>
 
-)};
+)
+};
 
 export default Login;
