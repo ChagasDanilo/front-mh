@@ -110,6 +110,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 10,
   },
+  Icone: {
+    alignSelf: 'center',
+    alignItems: 'flex-end',
+    alignContent: 'flex-end',
+    justifyContent: 'flex-end',
+    textAlign: 'right',
+    resizeMode: 'contain'
+  }
 });
 
 export default styles

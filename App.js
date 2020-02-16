@@ -6,6 +6,7 @@ import Login from './screens/login';
 import novaConta from './screens/novaConta';
 import listaComp from './screens/listaComprovantes';
 import listaCompEmitidos from './screens/listaCompEmitidos';
+import AddImage from './screens/imageModal';
 
 const mainNavigation = createStackNavigator({  
   Page1: {
@@ -23,6 +24,9 @@ const mainNavigation = createStackNavigator({
   ListaComprovantesEmitidos: {
     screen: listaCompEmitidos,
   },
+  AddComprovante: {
+    screen: AddImage,
+  }
 },
 {
   headerMode :'screen',

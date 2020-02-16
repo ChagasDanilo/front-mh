@@ -7,7 +7,7 @@ const Login = ({ navigation }) => {
   
     const [email, onChangeEmail] = React.useState('');
     const [senha, onChangeSenha] = React.useState('');
-  
+
     return (
     <KeyboardAvoidingView style={Styles.ContainerLogin} behavior="padding" enabled>
         <View style={Styles.ContainerLogin}>
