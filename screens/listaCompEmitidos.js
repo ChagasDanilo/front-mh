@@ -15,7 +15,7 @@ export default function App({ navigation }) {
   const [comprovantes , setComprovantes ] = useState([]);
 
   useEffect(()=>{
-    const handelGetData  = async () =>{      
+    const handelGetData  = async () =>{                
       const response = await api.get('receipt/1');
       
       //Alert.alert(response.data[0].path);      
@@ -29,8 +29,8 @@ export default function App({ navigation }) {
         <SafeAreaView style={Styles.Container}>
             <FlatList
                 data={comprovantes}
-                renderItem={({item}) =>                 
-                  <View style={Styles.ViewItem}>
+                renderItem={({item}) =>                     
+                  <View style={Styles.ViewItem}>                    
                     <Text style={Styles.TextDetailItem}>
                       {item.usersIssuer.username}
                     </Text>
@@ -58,12 +58,14 @@ export default function App({ navigation }) {
         renderIcon={active => active ? (<Icon name="list" style={Styles.actionButtonIcon} /> ) 
                       : (<Icon name="list" style={Styles.actionButtonIcon} />)}
                       >
+          {/*
           <ActionButton.Item
             buttonColor="#00C869"
             title="Ver comprovantes emitidos"
             onPress={() => navigation.navigate('ListaComprovantesEmitidos')}>            
             <Icon name='receipt' color='white' />
           </ActionButton.Item>
+          */}
           <ActionButton.Item
             buttonColor="#00C869"
             title="Enviar Comprovante"

@@ -58,12 +58,14 @@ export default function App({ navigation }) {
         renderIcon={active => active ? (<Icon name="list" style={Styles.actionButtonIcon} /> ) 
                       : (<Icon name="list" style={Styles.actionButtonIcon} />)}
                       >
+          {/*
           <ActionButton.Item
             buttonColor="#00C869"
             title="Ver comprovantes emitidos"
             onPress={() => navigation.navigate('ListaComprovantesEmitidos')}>            
             <Icon name='receipt' color='white' />
           </ActionButton.Item>
+          */}
           <ActionButton.Item
             buttonColor="#00C869"
             title="Enviar Comprovante"
