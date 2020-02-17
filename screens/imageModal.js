@@ -1,59 +1,81 @@
-import React, { useState } from "react";
-import {
-  Alert,
-  Modal,
-  View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  StyleSheet,
-  Text
-} from "react-native";
-import { RNCamera } from "react-native-camera";
+import * as React from 'react';
+import { Button, Image, View, TouchableOpacity, Text } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
-export default Camera = () => {
-  const [imageUri, setImageUri] = useState(null);
-  takePicture = async () => {
-    try {
-      if (this.camera) {
-        const options = {
-          quality: 0.5,
-          base64: true,
-          forceUpOrientation: true,
-          fixOrientation: true
-        };
-        const { uri } = await this.camera.takePictureAsync(options);
-        setImageUri(uri);
+import Styles from '../constants/styles';
 
-        alert("ok");
+export default class Comprovante extends React.Component {
+  state = {
+    image: null,
+  };
+
+  render() {
+    let { image } = this.state;
+
+    return (
+
+      <View style={Styles.Container}> 
+        <View style={Styles.Botton}>
+          <TouchableOpacity                
+            onPress={this._pickImage}
+            hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
+          >
+            <Text style={Styles.Text}>
+              Login
+            </Text>
+          </TouchableOpacity>          
+        </View>
+        <View>
+            {image &&
+              <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        </View>
+      </View>
+    );
+  }
+
+  componentDidMount() {
+    this.getPermissionAsync();
+    console.log('hi');
+  }
+
+  getPermissionAsync = async () => {
+    if (Constants.platform.ios) {
+      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
       }
-    } catch (err) {
-      alert(err.message);
     }
   }
-  return (
-    <RNCamera
-      ref={camera => { this.camera = camera; }}
-      style={styles.camera}
-      type={RNCamera.Constants.Type.front}
-      autoFocus={RNCamera.Constants.AutoFocus.on}
-      flashMode={RNCamera.Constants.FlashMode.off}
-      permissionDialogTitle={"Permission to use camera"}
-      permissionDialogMessage={"We need your permission to use your camera phone"}
-    >
-      <TouchableOpacity onPress={takePicture} style={styles.button}>
-        <Text>PICTURE</Text>
-      </TouchableOpacity>
-    </RNCamera>
-  )
-}
-const styles = StyleSheet.create({
-  camera: {
-    flex: 1
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
+};
+
+Comprovante.navigationOptions = {
+  title: 'Adicionar comprovante',
+  gestureEnabled: true,
+  headerStyle: {
+    backgroundColor: '#262626',
+    elevation: 0,
+    shadowOpacity: 0,
+    borderBottomWidth: 0,      
   },
-  button: {
-    alignSelf: "center",
-    backgroundColor: "blue",
-    color: "#fff"
-  }
-});
+  headerTintColor: '#00C869',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },  
+};
