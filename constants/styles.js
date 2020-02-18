@@ -30,6 +30,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     backgroundColor: 'transparent',
   },
+  ViewInput: {
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+    backgroundColor: 'transparent',
+  },
   Botton: {
     marginTop: 50,
     paddingVertical: 10,
@@ -103,12 +108,14 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
   ImgComp: {
-    width: (Dimensions.get("window").width - 15),
-    height: (Dimensions.get("window").height / 2),
+    //width: (Dimensions.get("window").width - 15),
+    //height: (Dimensions.get("window").height / 2),
     resizeMode : 'contain',
     alignContent: 'center',
     alignSelf: 'center',
     marginTop: 10,
+    maxWidth : '100%',
+    height: 'auto'
   },
   Icone: {
     alignSelf: 'center',
@@ -117,7 +124,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     textAlign: 'right',
     resizeMode: 'contain'
-  }
+  },
+  ContainerImage:{
+    paddingTop: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  } ,
+  Imagem:{
+    width: 200,     
+    height: 200
+  }  
 });
 
 export default styles

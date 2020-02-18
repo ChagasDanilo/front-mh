@@ -16,7 +16,7 @@ export default function App({ navigation }) {
 
   useEffect(()=>{
     const handelGetData  = async () =>{                
-      const response = await api.get('receipt/1');
+      const response = await api.get('receipt');
       
       //Alert.alert(response.data[0].path);      
       setComprovantes(response.data);

@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Alert,
+    AsyncStorage } from 'react-native';
 
 import Styles from '../constants/styles';
+import api from '../services/api';
 
 const Login = ({ navigation }) => {
   
     const [email, onChangeEmail] = React.useState('');
     const [senha, onChangeSenha] = React.useState('');
 
+    async function handleSubmit (){
+        try {
+            const data = {
+                password: senha,
+                email : email
+            }
+            const response = await api.post('login',data);
+            if (response.data.token){
+                await AsyncStorage.setItem('@mh-token', response.data.token);                
+                
+                navigation.navigate('ListaComprovantes');
+                
+            }else{
+                Alert.alert('Erro','Verifique o e-mail e senha e tente novamente!')  
+            }
+        } catch (error) {
+            Alert.alert('Erro','Erro ao realizar login. Tente novamente!')
+        }
+    }
     return (
     <KeyboardAvoidingView style={Styles.ContainerLogin} behavior="padding" enabled>
         <View style={Styles.ContainerLogin}>
@@ -48,7 +69,7 @@ const Login = ({ navigation }) => {
 
             <View style={Styles.Botton}>
                 <TouchableOpacity                
-                    onPress={() => navigation.navigate('ListaComprovantes')}
+                    onPress={handleSubmit}
                     hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
                 >
                     <Text style={Styles.Text}>

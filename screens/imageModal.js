@@ -1,55 +1,52 @@
-import * as React from 'react';
-import { Button, Image, View, TouchableOpacity, Text } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Button, Image, View, TouchableOpacity, Text, 
+  KeyboardAvoidingView, TextInput, Picker, Alert, Platform } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 
 import Styles from '../constants/styles';
+import styles from '../constants/styles';
+import symbolicateStackTrace from 'react-native/Libraries/Core/Devtools/symbolicateStackTrace';
+import api from '../services/api';
 
-export default class Comprovante extends React.Component {
-  state = {
-    image: null,
-  };
+const  Comprovante  = function({navigation}) {
+  const [valor, onChangeValor] = useState('');
+  const [destino, onChangeDestino] = useState('');
+  const [descricao, onChangeDescricao] = useState('');
+  const [image, onChangeImage] = useState(null);
+  const [destinatarios, setDestinatarios] = useState([]);
 
-  render() {
-    let { image } = this.state;
-
-    return (
-
-      <View style={Styles.Container}> 
-        <View style={Styles.Botton}>
-          <TouchableOpacity                
-            onPress={this._pickImage}
-            hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
-          >
-            <Text style={Styles.Text}>
-              Login
-            </Text>
-          </TouchableOpacity>          
-        </View>
-        <View>
-            {image &&
-              <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-        </View>
-      </View>
-    );
-  }
-
-  componentDidMount() {
-    this.getPermissionAsync();
-    console.log('hi');
-  }
-
-  getPermissionAsync = async () => {
-    if (Constants.platform.ios) {
-      const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-      if (status !== 'granted') {
-        alert('Sorry, we need camera roll permissions to make this work!');
+  useEffect(() =>{
+    const getPermissionAsync = async () => {
+      if (Constants.platform.ios) {
+        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+        if (status !== 'granted') {
+          alert('Desculpe, precisamos de permissões de rolo da câmera para fazer isso funcionar!');
+        }
       }
     }
-  }
+    const getDestinatarios  = async () =>{
+      try {
+        
+        const response = await api.get('user');
+        if (response.data){
+          setDestinatarios(response.data);
+        }
+      } catch (error) {
+        Alert.alert('Erro', 'Não foi possível carregar a lista de destinatários.');
+      }
+      
 
-  _pickImage = async () => {
+    }
+
+    getPermissionAsync();
+    getDestinatarios()
+  },[])
+  
+  
+
+  async function _pickImage() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -60,9 +57,112 @@ export default class Comprovante extends React.Component {
     console.log(result);
 
     if (!result.cancelled) {
-      this.setState({ image: result.uri });
+      onChangeImage(result);
     }
   };
+
+  async function handleSubmit(){
+
+    const dataImage = {
+      name: image.fileName,
+      clientName: image.fileName,
+      type: image.type,
+      uri:
+        Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+    }
+
+    const data = new FormData();
+    data.append('value', valor);
+    data.append('user_recipient_id', destino);
+    data.append('comment', descricao);
+    data.append('file', dataImage);  
+
+    try {
+      const response = await api.post('receipt',data);
+      if (response.data){
+        console.log(response.data);
+          
+        // histore.push('/');
+
+        // toast.success('Salvo com sucesso!')
+        navigation.navigate('ListaComprovantes')
+      }
+    } catch (error) {
+      // toast.error('Erro ao realizar envio. Tente novamente!' +error)
+      Alert.alert('Erro','Erro ao realizar envio. Tente novamente!')
+    }
+  }
+
+
+    //let { image } = this.state;
+
+    return (
+
+      <KeyboardAvoidingView style={Styles.Container} behavior="padding" enabled>
+        <View>             
+            <View>
+                <TextInput                    
+                    style={Styles.TextInput}
+                    placeholder='Qual o valor do comprovante...'
+                    keyboardType={"numeric"}
+                    onChangeText={valor => onChangeValor(valor)}
+                    value={valor}
+                    placeholderTextColor={'#fff'}
+                    autoFocus={true}
+                />
+            </View>
+            <View style={Styles.ViewInput}>
+                <Picker
+                  onValueChange={destino => onChangeDestino(destino)}
+                  selectedValue={destino}
+                  style={Styles.TextInput}
+                >
+                  <Picker.Item label='Selecione' value=''/>
+                  {destinatarios.map(dest =><Picker.Item key={dest.id} label={dest.username} value={dest.id}/>)}
+                </Picker>               
+            </View>              
+            <View>
+                <TextInput                    
+                    style={Styles.TextInput}
+                    placeholder='Digite alguma descrição...'
+                    multiline={true}
+                    onChangeText={descricao => onChangeDescricao(descricao)}
+                    value={descricao}
+                    placeholderTextColor={'#fff'}
+                />
+            </View>
+
+            <View style={Styles.Botton}>
+            <TouchableOpacity                
+              onPress={() =>[
+                _pickImage()
+              ]}
+              hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
+            >
+              <Text style={Styles.Text}>
+                Adicionar arquivo
+              </Text>
+            </TouchableOpacity>          
+          </View>
+          <View style={styles.ContainerImage}>
+              {image &&
+                <Image source={{ uri: image.uri }} style={styles.Imagem} />}
+          </View>
+        </View>        
+        <View style={Styles.Botton}>
+            <TouchableOpacity                
+              onPress={handleSubmit}
+              hitSlop={{ top: 10, bottom: 10, left: 5, right: 5 }}
+            >
+              <Text style={Styles.Text}>
+                Enviar
+              </Text>
+            </TouchableOpacity>          
+          </View>        
+    </KeyboardAvoidingView>     
+    );
+
+  
 };
 
 Comprovante.navigationOptions = {
@@ -77,5 +177,7 @@ Comprovante.navigationOptions = {
   headerTintColor: '#00C869',
   headerTitleStyle: {
     fontWeight: 'bold',
-  },  
+  }
 };
+
+export default Comprovante;
