@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { Button, Image, View, TouchableOpacity, Text, 
-  KeyboardAvoidingView, TextInput, Picker, Alert, Platform } from 'react-native';
+import { Button, Image, View, TouchableOpacity, TouchableWithoutFeedback ,Text, 
+  KeyboardAvoidingView, TextInput, Picker, Alert, Platform,
+  Keyboard } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -63,19 +64,23 @@ const  Comprovante  = function({navigation}) {
 
   async function handleSubmit(){
 
+    let uriParts = image.uri.split('.');
+    let fileType = uriParts[uriParts.length - 1];
+
     const dataImage = {
-      name: image.fileName,
-      clientName: image.fileName,
-      type: image.type,
-      uri:
-        Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+      name: 'Receipt.'+fileType,
+      clientName: 'Receipt.'+fileType,
+      type: 'image/' + image.fileType,
+      uri:Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
     }
 
+    // uri:Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+    
     const data = new FormData();
     data.append('value', valor);
     data.append('user_recipient_id', destino);
     data.append('comment', descricao);
-    data.append('file', dataImage);  
+    data.append('file', dataImage);      
 
     try {
       const response = await api.post('receipt',data);
@@ -89,7 +94,8 @@ const  Comprovante  = function({navigation}) {
       }
     } catch (error) {
       // toast.error('Erro ao realizar envio. Tente novamente!' +error)
-      Alert.alert('Erro','Erro ao realizar envio. Tente novamente!')
+      Alert.alert('Erro','Erro ao realizar envio. Tente novamente!');
+      console.log(error);
     }
   }
 
@@ -97,8 +103,9 @@ const  Comprovante  = function({navigation}) {
     //let { image } = this.state;
 
     return (
-
-      <KeyboardAvoidingView style={Styles.Container} behavior="padding" enabled>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+      <KeyboardAvoidingView style={Styles.Container} behavior="padding" enabled={true}>
+        
         <View>             
             <View>
                 <TextInput                    
@@ -115,7 +122,9 @@ const  Comprovante  = function({navigation}) {
                 <Picker
                   onValueChange={destino => onChangeDestino(destino)}
                   selectedValue={destino}
-                  style={Styles.TextInput}
+                  style={Styles.Picker}
+                  itemStyle={{height: 60, color: '#fff'}}                  
+                  
                 >
                   <Picker.Item label='Selecione' value=''/>
                   {destinatarios.map(dest =><Picker.Item key={dest.id} label={dest.username} value={dest.id}/>)}
@@ -158,8 +167,10 @@ const  Comprovante  = function({navigation}) {
                 Enviar
               </Text>
             </TouchableOpacity>          
-          </View>        
-    </KeyboardAvoidingView>     
+          </View>   
+           
+    </KeyboardAvoidingView>  
+    </TouchableWithoutFeedback>     
     );
 
   

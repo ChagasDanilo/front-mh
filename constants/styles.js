@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#fff',
     borderBottomWidth: 1,
     backgroundColor: 'transparent',
+    height: 60,
   },
   Botton: {
     marginTop: 50,
@@ -109,13 +110,13 @@ const styles = StyleSheet.create({
   },
   ImgComp: {
     //width: (Dimensions.get("window").width - 15),
-    //height: (Dimensions.get("window").height / 2),
+    height: (Dimensions.get("window").height / 2),
     resizeMode : 'contain',
     alignContent: 'center',
     alignSelf: 'center',
     marginTop: 10,
-    maxWidth : '100%',
-    height: 'auto'
+    width : '95%',
+    //height: 'auto',
   },
   Icone: {
     alignSelf: 'center',
@@ -134,7 +135,15 @@ const styles = StyleSheet.create({
   Imagem:{
     width: 200,     
     height: 200
-  }  
+  },
+  Picker:{
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+    marginTop: 0,
+    color: '#fff',
+    backgroundColor: 'transparent',
+    height: 60
+  },
 });
 
 export default styles
