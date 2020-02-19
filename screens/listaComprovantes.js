@@ -1,5 +1,5 @@
 import React , { useState, useEffect, Component } from 'react';
-import { SafeAreaView, View, FlatList, Text, Image, TouchableOpacity, Alert } from 'react-native';
+import { SafeAreaView, View, FlatList, Text, Image, TouchableOpacity, RefreshControl, Alert } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { Icon } from 'react-native-elements';
 import moment from "moment";
@@ -13,6 +13,7 @@ const URL_BASE = 'https://williamestrela.herokuapp.com';
 
 export default function App({ navigation }) {  
   const [comprovantes , setComprovantes ] = useState([]);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(()=>{
     const handelGetData  = async () =>{                
@@ -22,12 +23,32 @@ export default function App({ navigation }) {
       setComprovantes(response.data);
     }
     handelGetData();
-  },[])  
+  },[]) 
+  
+  async function refresh (){
+    setRefreshing(true);
+             
+    const response = await api.get('receipt');
+    
+    setComprovantes(response.data);
+    setTimeout(() =>{
+      setRefreshing(false)
+    },1000);
+    //setRefreshing(false)
+  }
 
   return (
     <View style={{flex: 1, backgroundColor: '#262626'}}>                
         <SafeAreaView style={Styles.Container}>
             <FlatList
+              refreshControl={
+                <RefreshControl 
+                  colors={['#fff']} 
+                  tintColor='#fff' 
+                  refreshing={refreshing} 
+                  onRefresh={refresh}
+                  progressBackgroundColor='#404040' />
+              }
                 data={comprovantes}
                 renderItem={({item}) =>                     
                   <View style={Styles.ViewItem}>                    
